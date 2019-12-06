@@ -1,1 +1,1 @@
-# Solutions for Sadvent of Code 2019 Challenge
+# Solutions for advent of code 2019 challenge
