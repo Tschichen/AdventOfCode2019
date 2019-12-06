@@ -8,16 +8,18 @@ def parse_file(file):
         array = line.split(',')
         for number in array:
             intcode.append(int(number))
-        #intcode[1] = 12
-        #intcode[2] = 2
+        intcode[1] = 12
+        intcode[2] = 2
         return intcode
 
 def run_intcode(intcode):
     for i in range(len(intcode)):
         if i % 4 == 0:
             operation = intcode[i]
-            first_number = intcode[i+1]
-            second_number = intcode[i+2]
+            first_place = intcode[i+1]
+            second_place = intcode[i+2]
+            first_number = intcode[first_place]
+            second_number = intcode[second_place]
             storage_place = intcode[i+3]
             if operation == 1:
                 result = first_number + second_number
@@ -27,7 +29,6 @@ def run_intcode(intcode):
                 intcode[storage_place] = result
             if operation == 99:
                 return intcode
-            print(intcode)
         i += 1
 
 
