@@ -10,9 +10,8 @@ def run_intcode(new_intcode):
         for char in entry:
             if char != "-":
                 entry_array.append(int(char))
-        #print(entry_array)
         number = entry_array[-1]
-        if number == 1 and len(entry_array) > 1 and entry_array[-2] == 0:
+        if number == 1:
             if len(entry_array) < 3 or entry_array[-3] == 0:
                 first_number = int(new_intcode[int(new_intcode[i+1])])
             else:
@@ -24,7 +23,7 @@ def run_intcode(new_intcode):
             result = int(first_number) + int(second_number)
             new_intcode[int(new_intcode[i+3])] = result
             i += 4
-        elif number == 2 and len(entry_array) > 1 and entry_array[-2] == 0:
+        elif number == 2:
             if len(entry_array) < 3 or entry_array[-3] == 0:
                 first_number = new_intcode[int(new_intcode[i+1])]
             else:
@@ -36,25 +35,21 @@ def run_intcode(new_intcode):
             result = int(first_number) * int(second_number)
             new_intcode[int(new_intcode[i+3])] = result
             i += 4
-        elif number == 3 and len(entry_array) < 2:
+        elif number == 3:
             input = 1
             new_intcode[int(new_intcode[i+1])] = input
             i += 2
-        elif (number == 4 and len(entry_array) < 2) or (number == 9 and entry_array[-2] == 9 and len(entry_array) == 2):
-            if new_intcode[int(new_intcode[i+1])] != 0:
-                if len(entry_array) > 1 and entry_array[-2] == 0:
-                    print("final output: ", new_intcode[int(new_intcode[i+1])])
-                else:
-                    print("final output: ", new_intcode[i + 1])
-                break
+        elif number == 4:
+            if len(entry_array) < 3 or entry_array[-2] == 0:
+                print("output: ", new_intcode[int(new_intcode[i + 1])])
             else:
-                if len(entry_array) > 1 and entry_array[-2] == 0:
-                    print("output: ", new_intcode[int(new_intcode[i + 1])])
-                else:
-                    print("output: ", new_intcode[i + 1])
+                print("output: ", new_intcode[i + 1])
             i += 2
+        elif number == 9 and entry_array[-2] == 9:
+            return
         else:
-           i += 1
+            print('ERROR')
+            return
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
