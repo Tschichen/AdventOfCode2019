@@ -17,14 +17,29 @@ def build_layers(input):
             k += 1
     return layer_array
 
-def count_zeros(layer_array):
-    pass
+def count_numbers(layer_array, number):
+    count = 0
+    for layer in layer_array:
+        number = sentence.count(number)
+        count += number
+
+    return count
 
 def find_result(layer_array):
-    most_zeros = []
+    zeros = []
     for layer in layer_array:
-        number = count_zeros(layer)
+        number = count_zeros(layer, "0")
+        zeros.append([number, layer])
 
+    zeros.sort(reverse=True)
+
+    max_zeros = zeros[0]
+    layers_for_result = max_zeros[1]
+    einser = count_numbers(layers_for_result, "1")
+    zweier = count_numbers(layers_for_result, "2")
+    result = einser * zweier
+
+    return result
 
 
 
@@ -46,6 +61,8 @@ if __name__ == "__main__":
         print("part1")
         layer_array = build_layers(input_string)
         print(layer_array)
+        result = find_result(layer_array)
+        print(result)
 
     if args.part == "part2":
         print("part2")
