@@ -61,3 +61,9 @@ if __name__ == '__main__':
 
     if args.part == "part2":
         print("part2")
+        G = nx.Graph()
+        G.add_node('COM', name='COM')
+        parse_input_list(G, input_array)
+        length = nx.shortest_path_length(G, 'SAN', 'YOU')
+        print(length)
+        print("result: ", length-2)

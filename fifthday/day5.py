@@ -42,14 +42,17 @@ def run_intcode(new_intcode):
             i += 2
         elif (number == 4 and len(entry_array) < 2) or (number == 9 and entry_array[-2] == 9 and len(entry_array) == 2):
             if new_intcode[int(new_intcode[i+1])] != 0:
-                print("final output: ", new_intcode[int(new_intcode[i+1])])
+                if len(entry_array) > 1 and entry_array[-2] == 0:
+                    print("final output: ", new_intcode[int(new_intcode[i+1])])
+                else:
+                    print("final output: ", new_intcode[i + 1])
                 break
             else:
-                print("diagnostic succesful. Output: ", new_intcode[int(new_intcode[i+1])])
+                if len(entry_array) > 1 and entry_array[-2] == 0:
+                    print("output: ", new_intcode[int(new_intcode[i + 1])])
+                else:
+                    print("output: ", new_intcode[i + 1])
             i += 2
-            #output.append(new_intcode[int(new_intcode[i+1])])
-            #new_intcode[0] = new_intcode[int(new_intcode[i + 1])]
-            #print("output: ", new_intcode[int(new_intcode[i+1])])
         else:
            i += 1
 
@@ -70,7 +73,6 @@ if __name__ == '__main__':
     if args.part == "part1":
         print("part1")
         code = run_intcode(input_values)
-        #print(code[0])
 
     if args.part == "part2":
         print("part2")
