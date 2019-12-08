@@ -3,7 +3,8 @@ import argparse
 
 def run_intcode(new_intcode):
     output = []
-    for i in range(len(new_intcode)-4):
+    i = 0
+    while i < len(new_intcode) -1:
         entry = str(new_intcode[i])
         entry_array = []
         for char in entry:
@@ -13,7 +14,7 @@ def run_intcode(new_intcode):
         number = entry_array[-1]
         if number == 9 and entry_array[-2] == 9 and len(entry_array) == 2:
             return new_intcode
-        if number == 1 and len(entry_array) > 1 and entry_array[-2] == 0:
+        elif number == 1 and len(entry_array) > 1 and entry_array[-2] == 0:
             if len(entry_array) < 3 or entry_array[-3] == 0:
                 first_number = int(new_intcode[int(new_intcode[i+1])])
             else:
@@ -24,7 +25,8 @@ def run_intcode(new_intcode):
                 second_number = new_intcode[i+2]
             result = int(first_number) + int(second_number)
             new_intcode[int(new_intcode[i+3])] = result
-        if number == 2 and len(entry_array) > 1 and entry_array[-2] == 0:
+            i += 4
+        elif number == 2 and len(entry_array) > 1 and entry_array[-2] == 0:
             if len(entry_array) < 3 or entry_array[-3] == 0:
                 first_number = new_intcode[int(new_intcode[i+1])]
             else:
@@ -35,13 +37,18 @@ def run_intcode(new_intcode):
                 second_number = new_intcode[i+2]
             result = int(first_number) * int(second_number)
             new_intcode[int(new_intcode[i+3])] = result
-        if number == 3 and len(entry_array) < 2:
+            i += 4
+        elif number == 3 and len(entry_array) < 2:
             input = 1
             new_intcode[int(new_intcode[i+1])] = input
-        if number == 4 and len(entry_array) < 2:
+            i += 2
+        elif number == 4 and len(entry_array) < 2:
             output.append(new_intcode[int(new_intcode[i+1])])
-            print(new_intcode[int(new_intcode[i+1])])
-
+            new_intcode[0] = new_intcode[int(new_intcode[i + 1])]
+            print("output: ", new_intcode[int(new_intcode[i+1])])
+            i += 2
+        else:
+            i += 1
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -60,6 +67,7 @@ if __name__ == '__main__':
     if args.part == "part1":
         print("part1")
         code = run_intcode(input_values)
+        print(code[0])
         #print(code)
 
     if args.part == "part2":
