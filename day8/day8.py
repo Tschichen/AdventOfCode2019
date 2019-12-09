@@ -5,13 +5,13 @@ import argparse
 def build_layers(input):
     layer_array = []
     i = 0
-    while i < len(input)-24:
+    while i < len(input):
         word = input[i:i+25]
         layer_array.append(word)
         i += 25
 
     final_layers = []
-    for i in range (len(layer_array)):
+    for i in range(len(layer_array)):
         if i % 6 == 0:
             single_layer = []
             single_layer.append(layer_array[i])
