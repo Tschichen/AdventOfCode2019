@@ -1,5 +1,6 @@
 import argparse
-#result shpuld be: 9961446
+# result should be: 9961446
+
 
 def run_intcode(new_intcode):
     output = []
@@ -36,7 +37,7 @@ def run_intcode(new_intcode):
             new_intcode[int(new_intcode[i+3])] = result
             i += 4
         elif number == 3:
-            input = 1
+            input = 5
             new_intcode[int(new_intcode[i+1])] = input
             i += 2
         elif number == 4:
@@ -45,6 +46,64 @@ def run_intcode(new_intcode):
             else:
                 print("output: ", new_intcode[i + 1])
             i += 2
+        elif number == 5:
+            if entry_array[-1] == 0:
+                number = int(new_intcode[int(new_intcode[i+1])])
+            else:
+                number = int(new_intcode[i+1])
+            if number != 0:
+                if len(entry_array) < 3 or entry_array[-2] == 0:
+                    i = int(new_intcode[int(new_intcode[i+2])])
+                else:
+                    i = int(new_intcode[i+2])
+        elif number == 6:
+            if entry_array[-1] == 0:
+                number = int(new_intcode[int(new_intcode[i+1])])
+            else:
+                number = int(new_intcode[i+1])
+            if number == 0:
+                if len(entry_array) < 3 or entry_array[-2] == 0:
+                    i = int(new_intcodeint[int(new_intcode[i+2])])
+                else:
+                    i = int(new_intcode[i+2])
+        elif number == 7:
+            if entry_array[-2] == 0:
+                number1 = int(new_intcodey[int(new_intcode[i+1])])
+            else:
+                number1 = int(new_intcodey[i+1])
+            if entry_array[-3] == 0:
+                number2 = int(new_intcode[int(new_intcode[i+2])])
+            else:
+                number2 = int(new_intcode[i+2])
+            if number1 < number2:
+                if len(entry_array) < 4 or entry_array[-4] == 0:
+                    new_intcode[int(new_intcode[i+3])] = str(1)
+                else:
+                    new_intcode[i+3] = str(1)
+            else:
+                if len(entry_array) < 4 or entry_array[-4] == 0:
+                    new_intcode[int(new_intcode[i + 3])] = str(0)
+                else:
+                    new_intcode[i+3] = str(0)
+        elif number == 8:
+            if entry_array[-1] == 0:
+                number1 = new_intcode[int(new_intcode[i + 1])]
+            else:
+                number1 = int(new_intcode[i + 1])
+            if entry_array[-2] == 0:
+                number2 = new_intcode[int(new_intcode[i + 2])]
+            else:
+                number2 = int(new_intcode[i + 2])
+            if number1 == number2:
+                if len(entry_array) < 4 or entry_array[-4] == 0:
+                    new_intcode[int(new_intcode[i + 3])] = str(1)
+                else:
+                    new_intcode[i + 3] = str(1)
+            else:
+                if len(entry_array) < 4 or entry_array[-4] == 0:
+                    new_intcode[int(new_intcode[i + 3])] = str(0)
+                else:
+                    new_intcode[i + 3] = str(0)
         elif number == 9 and entry_array[-2] == 9:
             return
         else:
@@ -54,7 +113,6 @@ def run_intcode(new_intcode):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--infile', required=True)
-    parser.add_argument('-p', '--part', help="enter 'part1' or 'part2'. default: 'part1'", default='part1')
     args = parser.parse_args()
 
     input_values = []
@@ -65,9 +123,5 @@ if __name__ == '__main__':
         for entry in values:
             input_values.append(entry)
 
-    if args.part == "part1":
-        print("part1")
-        code = run_intcode(input_values)
-
-    if args.part == "part2":
-        print("part2")
+    print("part2")
+    run_intcode(input_values)
