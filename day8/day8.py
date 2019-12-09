@@ -1,6 +1,7 @@
 import argparse
 
-#25 pixels wide and 6 pixels tall
+# 25 pixels wide and 6 pixels tall
+
 
 def build_layers(input):
     layer_array = []
@@ -21,6 +22,7 @@ def build_layers(input):
 
     return final_layers
 
+
 def count_numbers(layer_array, number):
     count = 0
     for layer in layer_array:
@@ -28,6 +30,7 @@ def count_numbers(layer_array, number):
         count += amount
 
     return count
+
 
 def find_result(layer_array):
     zeros = []
@@ -37,8 +40,6 @@ def find_result(layer_array):
 
     zeros.sort()
 
-    print(zeros)
-
     min_zeros = zeros[0]
     layers_for_result = min_zeros[1]
     einser = count_numbers(layers_for_result, "1")
@@ -46,6 +47,38 @@ def find_result(layer_array):
     result = einser * zweier
 
     return result
+
+
+def compare_layers(layer_array):
+    picture = []
+    for i in range(6):
+        picture.append([])
+        for x in range(25):
+            picture[i].append([])
+        for j in range(len(layer_array)):
+            word = layer_array[j][i]
+            for k in range(len(word)):
+                picture[i][k].append(word[k])
+
+    final_picture = []
+    i = 0
+    for line in picture:
+        final_picture.append([])
+        for pixel in line:
+            for char in pixel:
+                if char == '0':
+                    final_picture[i].append('0')
+                    break
+                elif char == '1':
+                    final_picture[i].append('-')
+                    break
+            else:
+                final_picture[i].append('-')
+        i += 1
+
+    for line in final_picture:
+        print(line)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -58,8 +91,6 @@ if __name__ == "__main__":
         input = file.readlines()
         input_string += input[0]
 
-
-
     if args.part == "part1":
         print("part1")
         print(len(input_string))
@@ -69,3 +100,5 @@ if __name__ == "__main__":
 
     if args.part == "part2":
         print("part2")
+        layer_array = build_layers(input_string)
+        compare_layers(layer_array)
