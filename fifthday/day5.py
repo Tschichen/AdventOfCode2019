@@ -51,7 +51,10 @@ def run_intcode(new_intcode):
             else:
                 zahl = int(new_intcode[i+1])
             if zahl != 0:
-                i = int(new_intcode[i+2])
+                if len(entry_array) <4 or entry_array[-4] == 0:
+                    i = int(new_intcode[int(new_intcode[i+2])])
+                else:
+                    i = int(new_intcode[i+2])
             else:
                 i += 3
         elif number == 6:
@@ -60,7 +63,10 @@ def run_intcode(new_intcode):
             else:
                 zahl= int(new_intcode[i+1])
             if zahl == 0:
-                i = int(new_intcode[i+2])
+                if len(entry_array) <4 or entry_array[-4] == 0:
+                    i = int(new_intcode[int(new_intcode[i+2])])
+                else:
+                    i = int(new_intcode[i+2])
             else:
                 i += 3
         elif number == 7:
