@@ -1,5 +1,6 @@
 import argparse
 # result part1 should be: 9961446
+# result part2 should be: 742621
 
 
 def run_intcode(new_intcode):
@@ -85,11 +86,11 @@ def run_intcode(new_intcode):
             i += 4
         elif number == 8:
             if len(entry_array) < 3 or entry_array[-3] == 0:
-                number1 = new_intcode[int(new_intcode[i + 1])]
+                number1 = int(new_intcode[int(new_intcode[i + 1])])
             else:
                 number1 = int(new_intcode[i + 1])
             if len(entry_array) < 4 or entry_array[-4] == 0:
-                number2 = new_intcode[int(new_intcode[i + 2])]
+                number2 = int(new_intcode[int(new_intcode[i + 2])])
             else:
                 number2 = int(new_intcode[i + 2])
             if number1 == number2:
