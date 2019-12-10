@@ -11,8 +11,6 @@ def run_intcode(new_intcode):
             if char != "-":
                 entry_array.append(int(char))
         number = entry_array[-1]
-        print(number)
-        print("i ", i)
         if number == 1:
             if len(entry_array) < 3 or entry_array[-3] == 0:
                 first_number = int(new_intcode[int(new_intcode[i+1])])
@@ -38,17 +36,17 @@ def run_intcode(new_intcode):
             new_intcode[int(new_intcode[i+3])] = result
             i += 4
         elif number == 3:
-            input = 0
+            input = 5
             new_intcode[int(new_intcode[i+1])] = input
             i += 2
         elif number == 4:
-            if len(entry_array) < 3 or entry_array[-2] == 0:
+            if len(entry_array) < 3 or entry_array[-3] == 0:
                 print("output: ", new_intcode[int(new_intcode[i + 1])])
             else:
                 print("output: ", new_intcode[i + 1])
             i += 2
         elif number == 5:
-            if entry_array[-2] == 0:
+            if len(entry_array) < 3 or entry_array[-3] == 0:
                 zahl = int(new_intcode[int(new_intcode[i+1])])
             else:
                 zahl = int(new_intcode[i+1])
@@ -57,7 +55,7 @@ def run_intcode(new_intcode):
             else:
                 i += 3
         elif number == 6:
-            if entry_array[-2] == 0:
+            if len(entry_array) < 3 or entry_array[-3] == 0:
                 zahl = int(new_intcode[int(new_intcode[i+1])])
             else:
                 zahl= int(new_intcode[i+1])
@@ -66,41 +64,41 @@ def run_intcode(new_intcode):
             else:
                 i += 3
         elif number == 7:
-            if entry_array[-2] == 0:
+            if len(entry_array) < 3 or entry_array[-3] == 0:
                 number1 = int(new_intcode[int(new_intcode[i+1])])
             else:
                 number1 = int(new_intcode[i+1])
-            if entry_array[-3] == 0:
+            if len(entry_array) < 4 or entry_array[-4] == 0:
                 number2 = int(new_intcode[int(new_intcode[i+2])])
             else:
                 number2 = int(new_intcode[i+2])
             if number1 < number2:
-                if len(entry_array) < 4 or entry_array[-4] == 0:
+                if len(entry_array) < 5 or entry_array[-5] == 0:
                     new_intcode[int(new_intcode[i+3])] = str(1)
                 else:
                     new_intcode[i+3] = str(1)
             else:
-                if len(entry_array) < 4 or entry_array[-4] == 0:
+                if len(entry_array) < 5 or entry_array[-5] == 0:
                     new_intcode[int(new_intcode[i + 3])] = str(0)
                 else:
                     new_intcode[i+3] = str(0)
             i += 4
         elif number == 8:
-            if entry_array[-2] == 0:
+            if len(entry_array) < 3 or entry_array[-3] == 0:
                 number1 = new_intcode[int(new_intcode[i + 1])]
             else:
                 number1 = int(new_intcode[i + 1])
-            if entry_array[-3] == 0:
+            if len(entry_array) < 4 or entry_array[-4] == 0:
                 number2 = new_intcode[int(new_intcode[i + 2])]
             else:
                 number2 = int(new_intcode[i + 2])
             if number1 == number2:
-                if len(entry_array) < 4 or entry_array[-4] == 0:
+                if len(entry_array) < 5 or entry_array[-5] == 0:
                     new_intcode[int(new_intcode[i + 3])] = str(1)
                 else:
                     new_intcode[i + 3] = str(1)
             else:
-                if len(entry_array) < 4 or entry_array[-4] == 0:
+                if len(entry_array) < 5 or entry_array[-5] == 0:
                     new_intcode[int(new_intcode[i + 3])] = str(0)
                 else:
                     new_intcode[i + 3] = str(0)
