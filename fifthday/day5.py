@@ -79,15 +79,9 @@ def run_intcode(new_intcode):
             else:
                 number2 = int(new_intcode[i+2])
             if number1 < number2:
-                if len(entry_array) < 5 or entry_array[-5] == 0:
-                    new_intcode[int(new_intcode[i+3])] = str(1)
-                else:
-                    new_intcode[i+3] = str(1)
+                new_intcode[int(new_intcode[i+3])] = str(1)
             else:
-                if len(entry_array) < 5 or entry_array[-5] == 0:
-                    new_intcode[int(new_intcode[i + 3])] = str(0)
-                else:
-                    new_intcode[i+3] = str(0)
+                new_intcode[int(new_intcode[i + 3])] = str(0)
             i += 4
         elif number == 8:
             if len(entry_array) < 3 or entry_array[-3] == 0:
@@ -99,15 +93,9 @@ def run_intcode(new_intcode):
             else:
                 number2 = int(new_intcode[i + 2])
             if number1 == number2:
-                if len(entry_array) < 5 or entry_array[-5] == 0:
-                    new_intcode[int(new_intcode[i + 3])] = str(1)
-                else:
-                    new_intcode[i + 3] = str(1)
+                new_intcode[int(new_intcode[i + 3])] = str(1)
             else:
-                if len(entry_array) < 5 or entry_array[-5] == 0:
-                    new_intcode[int(new_intcode[i + 3])] = str(0)
-                else:
-                    new_intcode[i + 3] = str(0)
+                new_intcode[int(new_intcode[i + 3])] = str(0)
             i += 4
         elif number == 9 and entry_array[-2] == 9:
             return
